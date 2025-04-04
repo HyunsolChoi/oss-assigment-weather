@@ -2,7 +2,7 @@ import Papa from 'papaparse';
 import { LambertConverter } from './LambertConverter';
 import { getBaseTime } from './getBaseTime';
 import { getFcstTime } from './getFcstTime';
-import { weatherReq } from '../API/weatherReq';
+import { weatherReq } from './weatherReq';
 
 export async function fetchWeather(onProgress?: () => void): Promise<any[]> {
     const converter = new LambertConverter();
