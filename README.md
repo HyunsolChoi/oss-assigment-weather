@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+# OSS React Naver Weather Map
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> 지역별 날씨 데이터를 네이버 지도 위에 시각화하여 보여주는 웹 애플리케이션입니다.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 프로젝트 개요
 
-### `npm start`
+- 기상청 공공 데이터를 활용하여 **지역별 날씨 예보**를 시각적으로 보여주는 웹 서비스입니다.
+- 사용자는 네이버 지도를 통해 각 지역의 **강수확률(POP)**, **최고/최저기온(TMX/TMN)**, **풍속(WSD)** 데이터를 확인할 수 있습니다.
+- 지도 위에 **범례(legend)**와 함께 날씨 값에 따라 색상이 입혀진 그리드가 표시됩니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 기술 스택
 
-### `npm test`
+### 프론트엔드
+- **React**
+- **TypeScript**
+- **Naver Map JavaScript API**
+- **PapaParse (CSV 파싱)**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 백엔드
+- **Node.js (Express)**
+- 기상청 API 프록시 서버
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 주요 기능
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- `LOC_CODE_EUC_KR.csv`를 기반으로 각 지역의 위도/경도 → 기상청 격자 좌표(nx, ny)로 변환
+- 기상청 API (`getVilageFcst`)를 통해 예보 데이터 호출
+- 날씨 데이터를 지도에 **시각화 (색상 + 투명도)**
+- 실시간 로딩 오버레이 및 **Glassmorphism UI** 적용
+- **범례 자동 생성**으로 값의 범위 인식 가능
+- 데이터 없을 경우 **재시도 로직 적용**
+- Refresh 버튼으로 **데이터 수동 갱신 가능**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 실행 방법
+#### server/index.js 공공데이터 포털 key 값 입력 필수
+#### public/static/index.html 네이버 지도 API key 값 입력 필수
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- 서버 실행
+`node ./server/index.js` 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 클라이언트 실행`npm start`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 사용 API 상세 정보
 
-## Learn More
+- 네이버 지도 API 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  https://console.ncloud.com/naver-service/application
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+- 공공데이터 포털(기상청 API) 
+
+  https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15084084 
+
+---
