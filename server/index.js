@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
-const serviceKey = 'f2RibehMZS9OqPqnSEcRB9dc23TvnI8mwGXAKudmNl21texlPzfRlMRUklG4N5gbFPtIp98n0Ycmv0GoJs24OA==';
+const serviceKey = 'YOUR SERVICE KEY';
 
 app.get('/api/weather', async (req, res) => {
     const { nx, ny, baseDate, baseTime } = req.query;
